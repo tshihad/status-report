@@ -1,5 +1,6 @@
 package mailapi
 
+// See https://developers.google.com/gmail/api/quickstart/go#further_reading
 import (
 	"fmt"
 	"io/ioutil"
