@@ -8,6 +8,7 @@ type Mail struct {
 
 // Header to be encoded
 type Header struct {
-	To string
-	Cc string
+	To      string
+	Cc      string
+	Subject string
 }
