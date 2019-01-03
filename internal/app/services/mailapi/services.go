@@ -1,11 +1,13 @@
 package mailapi
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
@@ -64,4 +66,19 @@ func saveToken(path string, token *oauth2.Token) {
 	}
 	defer f.Close()
 	json.NewEncoder(f).Encode(token)
+}
+
+// Convets to base64
+func setMessage(user string, dest []string, cc []string, subject, bodyMessage string) string {
+	msg := fmt.Sprintf("From: %s\r\nTo: %s\r\nCc: %s\n\rSubject: %s\r\n\r\n%s",
+		user,
+		strings.Join(dest, ","),
+		strings.Join(cc, ","),
+		subject,
+		bodyMessage,
+	)
+	fmt.Println(msg)
+	encoding := base64.StdEncoding.EncodeToString([]byte(msg))
+
+	return encoding
 }

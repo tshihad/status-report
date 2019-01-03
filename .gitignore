@@ -8,4 +8,5 @@ vendor
 config.toml
 
 #Credentials
-credentials
+credentials.*
+token.json

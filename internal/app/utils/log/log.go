@@ -54,3 +54,11 @@ func Errorf(format string, args ...string) {
 func Error(args ...string) {
 	Defaultloggger.Error(args)
 }
+
+func Print(args ...string) {
+	Defaultloggger.Print(args)
+}
+
+func Printf(format string, args ...string) {
+	Defaultloggger.Printf(format, args)
+}

@@ -12,7 +12,7 @@ import (
 
 // Quickstart initialize quickstart mailing service
 func Quickstart() {
-	b, err := ioutil.ReadFile("credentials.json")
+	b, err := ioutil.ReadFile("config/credentials.json")
 	if err != nil {
 		log.Fatalf("Unable to read client secret file: %v", err)
 	}
