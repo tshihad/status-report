@@ -1,10 +1,7 @@
 package mailapi
 
 import (
-	"bytes"
-	"fmt"
 	"io/ioutil"
-	"mime/quotedprintable"
 
 	"google.golang.org/api/gmail/v1"
 
@@ -26,8 +23,8 @@ func authenticate(scope ...string) (*oauth2.Config, error) {
 	return config, nil
 }
 
-//NewSender Creates new sender
-func NewSender(Username string) *Mail {
+//NewMail Creates new sender
+func NewMail(Username string) *Mail {
 	return &Mail{Username}
 }
 
@@ -52,46 +49,6 @@ func (mail *Mail) sendMail(dest, cc []string, subject, msg string) error {
 		return errors.Wrapf(err, "Failed to send mail")
 	}
 	return nil
-}
-
-func (mail *Mail) writeEmail(to, cc []string, contentType, subject, bodyMessage string) string {
-
-	header := make(map[string]string)
-	header["From"] = mail.user
-
-	receipient := ""
-
-	for _, user := range to {
-		receipient = receipient + user
-	}
-	Cc := ""
-	for _, c := range cc {
-		Cc += c
-	}
-
-	header["To"] = receipient
-	header["Cc"] = Cc
-	header["Subject"] = subject
-	header["MIME-Version"] = "1.0"
-	header["Content-Type"] = fmt.Sprintf("%s; charset=\"utf-8\"", contentType)
-	header["Content-Transfer-Encoding"] = "quoted-printable"
-	header["Content-Disposition"] = "inline"
-
-	message := ""
-
-	for key, value := range header {
-		message += fmt.Sprintf("%s: %s\r\n", key, value)
-	}
-
-	var encodedMessage bytes.Buffer
-
-	finalMessage := quotedprintable.NewWriter(&encodedMessage)
-	finalMessage.Write([]byte(bodyMessage))
-	finalMessage.Close()
-
-	message += "\r\n" + encodedMessage.String()
-
-	return message
 }
 
 //SendHTMLEmail to write html formated mails

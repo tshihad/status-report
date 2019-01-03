@@ -7,7 +7,7 @@ import (
 )
 
 func Execute() {
-	sender := mailapi.NewSender("shihad@qburst.com", "")
+	sender := mailapi.NewMail("shihad@qburst.com")
 	err := sender.SendHTMLEmail([]string{"tshihad9@gmail.com"}, nil, "test", "This is a test message")
 	fmt.Println(err)
 	// mailapi.Quickstart()
