@@ -62,3 +62,11 @@ func Print(args ...string) {
 func Printf(format string, args ...string) {
 	Defaultloggger.Printf(format, args)
 }
+
+func Panicf(format string, args ...string) {
+	Defaultloggger.Panicf(format, args)
+}
+
+func Panic(args ...string) {
+	Defaultloggger.Panic(args)
+}
