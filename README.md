@@ -2,11 +2,14 @@
 
 This project intention to serve status report for qburst employees.
 
+## Done
+
+* Implemented google mail api package.
+
 ## ToDo
 
-* Implement google mail system. Both Drafting and send mail.
 * Todo and work-done list.
-* Implement api call to <https://space.qburst.com/l/#/dailyStatus/apply>
+* Implement api call to <https://space.qburst.com/l/#/dailyStatus/apply> and apply status report there.
 * Basic UI for status report.
 
 ## Guidlines

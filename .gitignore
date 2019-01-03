@@ -1,2 +1,12 @@
 # logs
 logs
+
+#packages
+vendor
+
+#config
+config.toml
+
+#Credentials
+credentials.*
+token.json
