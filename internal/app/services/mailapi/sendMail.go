@@ -27,12 +27,12 @@ func authenticate(scope ...string) (*oauth2.Config, error) {
 }
 
 //NewSender Creates new sender
-func NewSender(Username, Password string) Sender {
-	return Sender{Username}
+func NewSender(Username string) *Mail {
+	return &Mail{Username}
 }
 
 //SendMail using simple smtp auth
-func (sender Sender) sendMail(dest, cc []string, subject, msg string) error {
+func (mail *Mail) sendMail(dest, cc []string, subject, msg string) error {
 	config, err := authenticate(gmail.GmailSendScope)
 	if err != nil {
 		return err
@@ -46,7 +46,7 @@ func (sender Sender) sendMail(dest, cc []string, subject, msg string) error {
 	message := &gmail.Message{
 		Raw: msg,
 	}
-	_, err = srv.Users.Messages.Send(sender.user, message).Do()
+	_, err = srv.Users.Messages.Send(mail.user, message).Do()
 
 	if err != nil {
 		return errors.Wrapf(err, "Failed to send mail")
@@ -54,10 +54,10 @@ func (sender Sender) sendMail(dest, cc []string, subject, msg string) error {
 	return nil
 }
 
-func (sender Sender) writeEmail(to, cc []string, contentType, subject, bodyMessage string) string {
+func (mail *Mail) writeEmail(to, cc []string, contentType, subject, bodyMessage string) string {
 
 	header := make(map[string]string)
-	header["From"] = sender.user
+	header["From"] = mail.user
 
 	receipient := ""
 
@@ -95,7 +95,7 @@ func (sender Sender) writeEmail(to, cc []string, contentType, subject, bodyMessa
 }
 
 //SendHTMLEmail to write html formated mails
-func (sender *Sender) SendHTMLEmail(dest, cc []string, subject, bodyMessage string) error {
-	msg := setMessage(sender.user, dest, cc, subject, bodyMessage)
-	return sender.sendMail(dest, cc, subject, msg)
+func (mail *Mail) SendHTMLEmail(dest, cc []string, subject, bodyMessage string) error {
+	msg := setMessage(mail.user, dest, cc, subject, bodyMessage)
+	return mail.sendMail(dest, cc, subject, msg)
 }

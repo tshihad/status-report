@@ -1,6 +1,6 @@
 package mailapi
 
 //Sender Contains credentials
-type Sender struct {
+type Mail struct {
 	user string
 }
