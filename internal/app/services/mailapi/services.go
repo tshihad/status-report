@@ -77,7 +77,6 @@ func setMessage(user string, dest []string, cc []string, subject, bodyMessage st
 		subject,
 		bodyMessage,
 	)
-	fmt.Println(msg)
 	encoding := base64.StdEncoding.EncodeToString([]byte(msg))
 
 	return encoding

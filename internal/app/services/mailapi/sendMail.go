@@ -99,9 +99,3 @@ func (sender *Sender) SendHTMLEmail(dest, cc []string, subject, bodyMessage stri
 	msg := setMessage(sender.user, dest, cc, subject, bodyMessage)
 	return sender.sendMail(dest, cc, subject, msg)
 }
-
-//SendPlainEmail to write plain formated mails
-func (sender *Sender) SendPlainEmail(dest, cc []string, subject, bodyMessage string) error {
-	msg := sender.writeEmail(dest, cc, "text/plain", subject, bodyMessage)
-	return sender.sendMail(dest, cc, subject, msg)
-}
